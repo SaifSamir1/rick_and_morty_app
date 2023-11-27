@@ -30,12 +30,6 @@ Widget buildNoInternetWidget() {
   );
 }
 
-Widget buildAppBarTitle() {
-  return const Text(
-    'Characters',
-    style: TextStyle(color: MyColors.myWhite),
-  );
-}
 
 SizedBox buildNoResultFound() {
   return const SizedBox(

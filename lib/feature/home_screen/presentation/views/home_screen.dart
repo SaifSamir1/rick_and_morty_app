@@ -26,6 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     BlocProvider.of<HomeCubit>(context).getAllCharacters();
   }
+  Widget buildAppBarTitle() {
+    return const Text(
+      'Characters',
+      style: TextStyle(color: MyColors.myWhite),
+    );
+  }
 
 
   Widget _buildSearchField() {
