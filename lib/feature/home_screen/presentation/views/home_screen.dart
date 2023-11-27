@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 
+import '../../../../core/utils/widgets.dart';
 import '../../data/models/character_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -101,13 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Widget _buildAppBarTitle() {
-    return const Text(
-      'Characters',
-      style: TextStyle(color: MyColors.myWhite),
-    );
-  }
-
   Widget _buildLoadedListWidget() {
     return SingleChildScrollView(
       child: Container(
@@ -145,30 +139,6 @@ class _HomeScreenState extends State<HomeScreen> {
     ) ;
   }
 
-  Widget buildNoInternetWidget() {
-    return Center(
-      child: Container(
-        width: double.infinity,
-        color: const Color(0xffC3EEFF),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              'Can\'t connect .. check internet',
-              style: TextStyle(
-                fontSize: 22,
-                color: MyColors.myGrey,
-              ),
-            ),
-            Image.asset('assets/images/on_internet.jpg')
-          ],
-        ),
-      ),
-    );
-  }
 
 
   @override
@@ -182,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             : Container(),
         backgroundColor: MyColors.myYellow,
-        title: _isSearching ? _buildSearchField() : _buildAppBarTitle(),
+        title: _isSearching ? _buildSearchField() : buildAppBarTitle(),
         actions: _buildAppBarActions(),
       ),
       body : OfflineBuilder(
@@ -199,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (state is GetAllCharactersSuccessState) {
                       allCharacters = (state).characters;
                       return _searchTextController.text.isNotEmpty && searchedForCharacters.isEmpty ?
-                          _buildNoResultFound():
+                          buildNoResultFound():
                         _buildLoadedListWidget();
                     } else {
                       return const Center(
@@ -218,19 +188,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  SizedBox _buildNoResultFound() {
-    return const SizedBox(
-                          width: double.infinity,
-                          height: 300,
-                          child: Center(
-                            child: Text('No Result Found . . . . .',style: TextStyle(
-                              fontSize: 20,
-                              color: MyColors.myYellow,
-                              fontWeight: FontWeight.w500,
-                            ),),
-                          ),
-                        );
-  }
 
 
 }
